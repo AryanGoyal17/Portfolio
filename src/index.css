@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+/* ---- Design tokens ----
+   Placeholder values — replace once the Figma/Stitch mockup is final.
+   Everything downstream (Tailwind utilities + components) reads from
+   these variables, so retheming later is a one-file change. */
+:root {
+  --color-bg: #ffffff;
+  --color-bg-elevated: #f7f7f8;
+  --color-fg: #0a0a0a;
+  --color-muted: #6b7280;
+  --color-accent: #6366f1;
+  --color-border: #e5e7eb;
+}
+
+[data-theme="dark"] {
+  --color-bg: #0a0a0a;
+  --color-bg-elevated: #141414;
+  --color-fg: #f5f5f5;
+  --color-muted: #9ca3af;
+  --color-accent: #818cf8;
+  --color-border: #262626;
+}
+
+@theme {
+  --color-background: var(--color-bg);
+  --color-background-elevated: var(--color-bg-elevated);
+  --color-foreground: var(--color-fg);
+  --color-muted: var(--color-muted);
+  --color-accent: var(--color-accent);
+  --color-border: var(--color-border);
+
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-body);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* respect reduced-motion users everywhere, including inside GSAP/R3F code */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
